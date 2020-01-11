@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - apt-get update
+      - apt-get install -y gettext
+      - npm install
+      - envsubst < sam-config.json > templateconfig.json
+      - aws cloudformation package --template-file sam-template.yml --s3-bucket $S3_BUCKET --output-template-file outputtemplate.yml
+artifacts:
+  type: zip
+  files:
+    - sam-template.yml
+    - outputtemplate.yml
+    - templateconfig.json

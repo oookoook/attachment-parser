@@ -1,0 +1,6 @@
+{
+    "Parameters" : {
+        "MaxMemory": "$MAX_MEMORY",
+        "ApiKey": "$API_KEY"
+    }
+}
