@@ -8,6 +8,9 @@ Resources:
       StageName: latest
       Cors: "'*'"
       EndpointConfiguration: Edge
+      BinaryMediaTypes:
+       - application/pdf
+       - application/octet-stream
         
   LambdaFunction:
     Type: AWS::Serverless::Function
