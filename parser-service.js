@@ -11,7 +11,8 @@ const matchRegex = function(text, regex) {
 }
 
 const presets = {
-    gsuite_invoice: (text) => { return { amount: matchRegex(text, "€(\\d+\\.\\d+)Total in EUR") };}
+    gsuite_invoice: (text) => { return { amount: matchRegex(text, "€(\\d+\\.\\d+)Total in EUR") };},
+    aws_invoice: (text) => { return { amount: matchRegex(text, "TOTAL AMOUNTUSD (\\d+\\.\\d+)"), number: matchRegex(text, "VAT Invoice Number:((\\d|\\w|-)+)") }}
 }
 
 const getContent = async function(body, preset, regex) {
