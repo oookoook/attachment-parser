@@ -1,7 +1,11 @@
 const pdf = require('pdf-parse');
 
+let debug = false;
+
 const matchRegex = function(text, regex) {
-    //console.log(text);
+    if(debug) {
+        console.debug(text);
+    }
     var r = new RegExp(regex);
     var m =  text.match(r);
     if(m && m.length) {
@@ -11,7 +15,7 @@ const matchRegex = function(text, regex) {
 }
 
 const presets = {
-    gsuite_invoice: (text) => { return { amount: matchRegex(text, "€(\\d+\\.\\d+)Total in EUR") };},
+    gsuite_invoice: (text) => { return { amount: matchRegex(text, "Total in EUR\n€(\\d+\\.\\d+)") };},
     aws_invoice: (text) => { return { amount: matchRegex(text, "TOTAL AMOUNTUSD (\\d+\\.\\d+)"), number: matchRegex(text, "VAT Invoice Number:((\\d|\\w|-)+)") }}
 }
 
@@ -26,5 +30,6 @@ const getContent = async function(body, preset, regex) {
 }
 
 module.exports = {
-    getContent
+    getContent,
+    debug: (d) => { debug = d; }
 }
